@@ -1,0 +1,3 @@
+	모델변환: transformation - 결과는 scale, rotate, translate 순으로 진행되고 각각 x, y, z 좌표를 파라미터 값으로 가져온다. rotate는 각도, x, y, z의 파라미터를 가져오며 각도는 입력한 값만큼 회전시킨다.
+	시점변환: projection - gluPerspective는 파라미터 값의 변화에 따라서 fov, 좌우 길이, 가시부피면의 가까운쪽의 면, 먼쪽의 면이 변화한다.
+	gluLookAt는 각각 카메라 위치 x, y, z 초점 x, y, z 카메라 상향 벡터 x, y, z 가 변화한다.
