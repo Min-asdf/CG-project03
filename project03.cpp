@@ -1,35 +1,35 @@
-#include <GL/glut.h>
+#include <GL/freeglut.h>
 
 float translateX = 0.0f, translateY = 0.0f, translateZ = -2.0f;
 float rotateX = 0.0f, rotateY = 0.0f;
 float scale = 1.0f;
 float cameraX = 0.0f, cameraY = 2.0f, cameraZ = 5.0f;
 
-int lastX = -1, lastY = -1;  // ¸¶Áö¸· ¸¶¿ì½º À§Ä¡
+int lastX = -1, lastY = -1;  // ë§ˆì§€ë§‰ ë§ˆìš°ìŠ¤ ìœ„ì¹˜
 
 void drawPyramid() {
     glBegin(GL_TRIANGLES);
 
-    // Á¤¸é »ï°¢Çü
-    glColor3f(1.0f, 0.0f, 0.0f);  // »¡°£»ö
+    // ì •ë©´ ì‚¼ê°í˜•
+    glColor3f(1.0f, 0.0f, 0.0f);  // ë¹¨ê°„ìƒ‰
     glVertex3f(0.0f, 1.0f, 0.0f);
     glVertex3f(-1.0f, -1.0f, 1.0f);
     glVertex3f(1.0f, -1.0f, 1.0f);
 
-    // ¿ŞÂÊ »ï°¢Çü
-    glColor3f(1.0f, 0.0f, 0.0f);  // »¡°£»ö
+    // ì™¼ìª½ ì‚¼ê°í˜•
+    glColor3f(1.0f, 0.0f, 0.0f);  // ë¹¨ê°„ìƒ‰
     glVertex3f(0.0f, 1.0f, 0.0f);
     glVertex3f(-1.0f, -1.0f, 1.0f);
     glVertex3f(-1.0f, -1.0f, -1.0f);
 
-    // ¿À¸¥ÂÊ »ï°¢Çü
-    glColor3f(1.0f, 0.0f, 0.0f);  // »¡°£»ö
+    // ì˜¤ë¥¸ìª½ ì‚¼ê°í˜•
+    glColor3f(1.0f, 0.0f, 0.0f);  // ë¹¨ê°„ìƒ‰
     glVertex3f(0.0f, 1.0f, 0.0f);
     glVertex3f(1.0f, -1.0f, 1.0f);
     glVertex3f(1.0f, -1.0f, -1.0f);
 
-    // µŞ¸é »ï°¢Çü
-    glColor3f(1.0f, 0.0f, 0.0f);  // »¡°£»ö
+    // ë’·ë©´ ì‚¼ê°í˜•
+    glColor3f(1.0f, 0.0f, 0.0f);  // ë¹¨ê°„ìƒ‰
     glVertex3f(0.0f, 1.0f, 0.0f);
     glVertex3f(-1.0f, -1.0f, -1.0f);
     glVertex3f(1.0f, -1.0f, -1.0f);
@@ -43,48 +43,48 @@ void display() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
-    // Ä«¸Ş¶ó À§Ä¡ ÁöÁ¤ (½ÃÁ¡ º¯È¯)
+    // ì¹´ë©”ë¼ ìœ„ì¹˜ ì§€ì • (ì‹œì  ë³€í™˜)
     gluLookAt(cameraX, cameraY, cameraZ, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
-    // ¸ğµ¨ º¯È¯ (ÀÌµ¿, È¸Àü, Å©±â Á¶Á¤)
-    glTranslatef(translateX, translateY, translateZ);  // ÀÌµ¿
-    glRotatef(rotateX, 1.0f, 0.0f, 0.0f);  // XÃà È¸Àü
-    glRotatef(rotateY, 0.0f, 1.0f, 0.0f);  // YÃà È¸Àü
-    glScalef(scale, scale, scale);  // Å©±â Á¶Á¤
+    // ëª¨ë¸ ë³€í™˜ (ì´ë™, íšŒì „, í¬ê¸° ì¡°ì •)
+    glTranslatef(translateX, translateY, translateZ);  // ì´ë™
+    glRotatef(rotateX, 1.0f, 0.0f, 0.0f);  // Xì¶• íšŒì „
+    glRotatef(rotateY, 0.0f, 1.0f, 0.0f);  // Yì¶• íšŒì „
+    glScalef(scale, scale, scale);  // í¬ê¸° ì¡°ì •
 
-    // ÇÇ¶ó¹Ìµå ±×¸®±â
+    // í”¼ë¼ë¯¸ë“œ ê·¸ë¦¬ê¸°
     drawPyramid();
 
     glutSwapBuffers();
 }
 
 void keyboard(unsigned char key, int x, int y) {
-    if (key == 'w') translateY += 0.1f;  // À§·Î ÀÌµ¿
-    if (key == 's') translateY -= 0.1f;  // ¾Æ·¡·Î ÀÌµ¿
-    if (key == 'a') translateX -= 0.1f;  // ¿ŞÂÊÀ¸·Î ÀÌµ¿
-    if (key == 'd') translateX += 0.1f;  // ¿À¸¥ÂÊÀ¸·Î ÀÌµ¿
-    if (key == 'q') translateZ += 0.1f;  // µÚ·Î ÀÌµ¿
-    if (key == 'e') translateZ -= 0.1f;  // ¾ÕÀ¸·Î ÀÌµ¿
+    if (key == 'w') translateY += 0.1f;  // ìœ„ë¡œ ì´ë™
+    if (key == 's') translateY -= 0.1f;  // ì•„ë˜ë¡œ ì´ë™
+    if (key == 'a') translateX -= 0.1f;  // ì™¼ìª½ìœ¼ë¡œ ì´ë™
+    if (key == 'd') translateX += 0.1f;  // ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì´ë™
+    if (key == 'q') translateZ += 0.1f;  // ë’¤ë¡œ ì´ë™
+    if (key == 'e') translateZ -= 0.1f;  // ì•ìœ¼ë¡œ ì´ë™
 
-    if (key == 'r') rotateX += 5.0f;  // XÃà È¸Àü
-    if (key == 'f') rotateX -= 5.0f;  // XÃà ¹İ´ë¹æÇâ È¸Àü
-    if (key == 't') rotateY += 5.0f;  // YÃà È¸Àü
-    if (key == 'g') rotateY -= 5.0f;  // YÃà ¹İ´ë¹æÇâ È¸Àü
+    if (key == 'r') rotateX += 5.0f;  // Xì¶• íšŒì „
+    if (key == 'f') rotateX -= 5.0f;  // Xì¶• ë°˜ëŒ€ë°©í–¥ íšŒì „
+    if (key == 't') rotateY += 5.0f;  // Yì¶• íšŒì „
+    if (key == 'g') rotateY -= 5.0f;  // Yì¶• ë°˜ëŒ€ë°©í–¥ íšŒì „
 
-    if (key == 27) exit(0);  // ESC Å°·Î Á¾·á
+    if (key == 27) exit(0);  // ESC í‚¤ë¡œ ì¢…ë£Œ
 
-    if (key == ']') scale += 0.1f;  // ]: Å©±â Áõ°¡
-    if (key == '[') scale -= 0.1f;  // [: Å©±â °¨¼Ò
+    if (key == ']') scale += 0.1f;  // ]: í¬ê¸° ì¦ê°€
+    if (key == '[') scale -= 0.1f;  // [: í¬ê¸° ê°ì†Œ
 
     glutPostRedisplay();
 }
 
-// ¸¶¿ì½º ¿òÁ÷ÀÓÀ» ÅëÇÑ ½ÃÁ¡ Á¶Á¤
+// ë§ˆìš°ìŠ¤ ì›€ì§ì„ì„ í†µí•œ ì‹œì  ì¡°ì •
 void mouseMotion(int x, int y) {
     if (lastX != -1 && lastY != -1) {
-        // ¸¶¿ì½º µå·¡±×¿¡ µû¸¥ Ä«¸Ş¶ó À§Ä¡ º¯°æ
-        cameraX += (x - lastX) * 0.01f;  // XÃà ¹æÇâ
-        cameraY -= (y - lastY) * 0.01f;  // YÃà ¹æÇâ
+        // ë§ˆìš°ìŠ¤ ë“œë˜ê·¸ì— ë”°ë¥¸ ì¹´ë©”ë¼ ìœ„ì¹˜ ë³€ê²½
+        cameraX += (x - lastX) * 0.01f;  // Xì¶• ë°©í–¥
+        cameraY -= (y - lastY) * 0.01f;  // Yì¶• ë°©í–¥
     }
     lastX = x;
     lastY = y;
@@ -101,9 +101,9 @@ void mouse(int button, int state, int x, int y) {
 
 void init() {
     glClearColor(0.0, 0.0, 0.0, 1.0);
-    glEnable(GL_DEPTH_TEST);  // ±íÀÌ Å×½ºÆ® È°¼ºÈ­
+    glEnable(GL_DEPTH_TEST);  // ê¹Šì´ í…ŒìŠ¤íŠ¸ í™œì„±í™”
 
-    // ¿ø±Ù Åõ¿µ ¼³Á¤
+    // ì›ê·¼ íˆ¬ì˜ ì„¤ì •
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(45.0, 1.0, 1.0, 10.0);  // FOV, aspect ratio, near, far plane
@@ -119,8 +119,8 @@ int main(int argc, char** argv) {
     init();
     glutDisplayFunc(display);
     glutKeyboardFunc(keyboard);
-    glutMotionFunc(mouseMotion);  // ¸¶¿ì½º µå·¡±× ÀÌº¥Æ® Ã³¸®
-    glutMouseFunc(mouse);  // ¸¶¿ì½º Å¬¸¯ ÀÌº¥Æ® Ã³¸®
+    glutMotionFunc(mouseMotion);  // ë§ˆìš°ìŠ¤ ë“œë˜ê·¸ ì´ë²¤íŠ¸ ì²˜ë¦¬
+    glutMouseFunc(mouse);  // ë§ˆìš°ìŠ¤ í´ë¦­ ì´ë²¤íŠ¸ ì²˜ë¦¬
 
     glutMainLoop();
     return 0;
