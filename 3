@@ -1,19 +1,19 @@
 #include <GL/freeglut.h>
 #include <cmath>
 
-// ÃÊ±â °ª ¼³Á¤
-float ballY = 3.0f;        // °øÀÇ ÃÊ±â ³ôÀÌ
-float velocity = 0.0f;     // ÃÊ±â ¼Óµµ
-float gravity = -0.8f;     // Áß·Â °¡¼Óµµ
-float elasticity = 0.8f;   // Åº¼º °è¼ö
-float timeStep = 0.016f;   // ´ÜÀ§ ½Ã°£
+// ì´ˆê¸° ê°’ ì„¤ì •
+float ballY = 3.0f;        // ê³µì˜ ì´ˆê¸° ë†’ì´
+float velocity = 0.0f;     // ì´ˆê¸° ì†ë„
+float gravity = -0.8f;     // ì¤‘ë ¥ ê°€ì†ë„
+float elasticity = 0.8f;   // íƒ„ì„± ê³„ìˆ˜
+float timeStep = 0.016f;   // ë‹¨ìœ„ ì‹œê°„
 
-// Flatshading°ú WireframeÀ» Åä±Û¸µÇÏ±â À§ÇÑ ºÎ¿ï º¯¼ö
+// Flatshadingê³¼ Wireframeì„ í† ê¸€ë§í•˜ê¸° ìœ„í•œ ë¶€ìš¸ ë³€ìˆ˜
 int FlatShaded = 0;
 int Wireframed = 0;
 
-float squash = 1.0f;       // È®´ë/Ãà¼Ò ºñÀ² (1.0Àº ¿ø·¡ Å©±â)
-bool isSquashing = false;  // ¹Ù´Ú¿¡ ´ê¾Ò´ÂÁö ¿©ºÎ
+float squash = 1.0f;       // í™•ëŒ€/ì¶•ì†Œ ë¹„ìœ¨ (1.0ì€ ì›ë˜ í¬ê¸°)
+bool isSquashing = false;  // ë°”ë‹¥ì— ë‹¿ì•˜ëŠ”ì§€ ì—¬ë¶€
 
 void MyKeyboard(unsigned char key, int x, int y) {
     switch (key) {
@@ -32,7 +32,7 @@ void MyKeyboard(unsigned char key, int x, int y) {
         glutPostRedisplay();
         break;
 
-        // ¿ÍÀÌ¾î ÇÁ·¹ÀÓ Åä±Û¸µ
+        // ì™€ì´ì–´ í”„ë ˆì„ í† ê¸€ë§
     case 'w':
         if (Wireframed) {
             Wireframed = 0;
@@ -49,7 +49,7 @@ void MyKeyboard(unsigned char key, int x, int y) {
 
 void Floor() {
     glPushMatrix();
-    glColor3f(0.3f, 0.3f, 0.3f); // È¸»ö ¹Ù´Ú
+    glColor3f(0.3f, 0.3f, 0.3f); // íšŒìƒ‰ ë°”ë‹¥
     glBegin(GL_QUADS);
     glVertex3f(-5.0f, 0.0f, -5.0f);
     glVertex3f(5.0f, 0.0f, -5.0f);
@@ -68,7 +68,7 @@ void Ball() {
     else {
         glScalef(1.0f - squash, 1.0f + squash, 1.0f);
     }
-    glColor3f(1.0f, 0.0f, 0.0f); // »¡°£»ö °ø
+    glColor3f(1.0f, 0.0f, 0.0f); // ë¹¨ê°„ìƒ‰ ê³µ
     glutSolidSphere(0.2, 50, 50);
     glPopMatrix();
 }
@@ -96,7 +96,7 @@ void display() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
-    // Ä«¸Ş¶ó ¼³Á¤ - ´õ °¡±î¿î À§Ä¡¿¡¼­ °´Ã¼¸¦ º¸±â À§ÇØ Á¶Á¤
+    // ì¹´ë©”ë¼ ì„¤ì • - ë” ê°€ê¹Œìš´ ìœ„ì¹˜ì—ì„œ ê°ì²´ë¥¼ ë³´ê¸° ìœ„í•´ ì¡°ì •
     gluLookAt(0.0, 2.5, 5.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0);
 
     Floor();
@@ -114,7 +114,7 @@ void reshape(int w, int h) {
 }
 
 void init() {
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // °ËÀº»ö ¹è°æ
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // ê²€ì€ìƒ‰ ë°°ê²½
     glEnable(GL_DEPTH_TEST);
 }
 
